@@ -1,0 +1,56 @@
+@import "config";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    letter-spacing: 1.1px;
+    color: $dark-color;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+// Navbar
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 2rem;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    opacity: 0.9;
+    border-bottom: 1px solid $primary-color;
+    background-color: $primary-dark-color;
+    height: 4rem;
+
+    ul {
+        display: flex;
+
+        a {
+            color: $light-color;
+            padding: 0.45rem;
+            margin: 0 0.25rem;
+            transition: all 0.3s ease-in-out;
+            border-radius: 20px;
+
+            &:hover {
+                color: $dark-color;
+                background-color: $primary-color;
+            }
+        }
+    }
+}

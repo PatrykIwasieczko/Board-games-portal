@@ -1,4 +1,62 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  letter-spacing: 1.1px;
+  color: #343a40;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  opacity: 0.9;
+  border-bottom: 1px solid #e57373;
+  background-color: #e57373;
+  height: 4rem;
+}
+
+.navbar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.navbar ul a {
+  color: #f4f4f4;
+  padding: 0.45rem;
+  margin: 0 0.25rem;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar ul a:hover {
+  color: #343a40;
+}
+/*# sourceMappingURL=App.css.map */
