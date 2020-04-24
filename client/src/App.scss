@@ -20,6 +20,7 @@ ul {
 
 a {
     text-decoration: none;
+    color: $dark-color;
 }
 
 // Text styles
@@ -58,8 +59,12 @@ a {
 // Utils
 
 .container {
-    width: 90vw;
+    width: 80vw;
     margin: 4rem auto;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 // Navbar
@@ -92,5 +97,18 @@ a {
                 background-color: $primary-color;
             }
         }
+    }
+}
+
+.rank-table {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr;
+    p {
+        padding: 0.5rem;
+        border: 1px solid $primary-color;
+        text-align: center;
+    }
+    p:nth-child(4n - 3) {
+        text-align: left;
     }
 }
