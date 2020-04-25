@@ -114,3 +114,24 @@ a {
         }
     }
 }
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+
+    .ratings {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: center;
+        align-items: center;
+    }
+
+    .game-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: center;
+        align-items: center;
+    }
+}

@@ -1,4 +1,7 @@
+// React
 import React from "react";
+
+// Components
 import Heading from "../components/Heading";
 import Container from "../components/Container";
 

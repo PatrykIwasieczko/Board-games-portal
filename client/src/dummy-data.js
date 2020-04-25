@@ -11,6 +11,7 @@ export const DATA = [
         categories: ["Adventure", "Fantasy"],
         mechanics: ["Card Driven Campaign/Battle", "Role Playing"],
         ourReview: "",
+        players: [1, 2, 3, 4, 5],
     },
     {
         id: 2,
@@ -24,6 +25,7 @@ export const DATA = [
         categories: ["Adventure", "Legacy"],
         mechanics: ["Exploration"],
         ourReview: "",
+        players: [2, 3, 4, 5],
     },
     {
         id: 3,
@@ -37,6 +39,7 @@ export const DATA = [
         categories: ["Strategy", "Fantasy"],
         mechanics: ["Worker placement"],
         ourReview: "",
+        players: [2, 3, 4, 5],
     },
     {
         id: 4,
@@ -50,6 +53,7 @@ export const DATA = [
         categories: ["Strategy"],
         mechanics: ["Worker placement", "Card drawing"],
         ourReview: "",
+        players: [2, 3, 4],
     },
     {
         id: 5,
@@ -63,6 +67,7 @@ export const DATA = [
         categories: ["Sci-Fi", "Strategy"],
         mechanics: ["Role playing", "Dice rolling"],
         ourReview: "",
+        players: [2],
     },
     {
         id: 6,
@@ -76,6 +81,7 @@ export const DATA = [
         categories: ["Sci-Fi", "Strategy"],
         mechanics: ["Worker placement"],
         ourReview: "",
+        players: [2, 3, 4, 5],
     },
     {
         id: 7,
@@ -89,6 +95,7 @@ export const DATA = [
         categories: ["Sci-Fi", "Strategy"],
         mechanics: ["Worker placement"],
         ourReview: "",
+        players: [2, 3, 4, 5],
     },
     {
         id: 8,
@@ -102,6 +109,7 @@ export const DATA = [
         categories: ["Strategy"],
         mechanics: ["Deck-building"],
         ourReview: "",
+        players: [2],
     },
     {
         id: 9,
@@ -115,6 +123,7 @@ export const DATA = [
         categories: ["Family", "Strategy"],
         mechanics: ["Deck-building"],
         ourReview: "",
+        players: [1, 2, 3, 4, 5],
     },
     {
         id: 10,
@@ -128,5 +137,6 @@ export const DATA = [
         categories: ["Strategy"],
         mechanics: ["Battle", "Area Control"],
         ourReview: "",
+        players: [2, 3, 4, 5],
     },
 ];
