@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
+import ListItem from "./ListItem";
 
 const GameCard = (props) => {
     return (
@@ -9,28 +10,13 @@ const GameCard = (props) => {
         >
             <Heading>{props.title}</Heading>
             <div className="ratings my-2">
-                <div>
-                    <Paragraph>Our Rating</Paragraph>
-                    <Paragraph>{props.ourRating}</Paragraph>
-                </div>
-                <div>
-                    <Paragraph>Players Rating</Paragraph>
-                    <Paragraph>{props.playersRating}</Paragraph>
-                </div>
+                <ListItem title="Our Rating" text={props.ourRating} />
+                <ListItem title="Players Rating" text={props.playersRating} />
             </div>
             <div className="game-details my-2">
-                <div>
-                    <Paragraph>Players</Paragraph>
-                    <Paragraph>{props.players.join(", ")}</Paragraph>
-                </div>
-                <div>
-                    <Paragraph>Playing time</Paragraph>
-                    <Paragraph>{props.playingTime}</Paragraph>
-                </div>
-                <div>
-                    <Paragraph>Complexity</Paragraph>
-                    <Paragraph>{props.complexity}</Paragraph>
-                </div>
+                <ListItem title="Players" text={props.players.join(", ")} />
+                <ListItem title="Playing Time" text={props.playingTime} />
+                <ListItem title="Complexity" text={props.complexity} />
             </div>
             <div>
                 <Paragraph styles="my-1">
