@@ -140,3 +140,27 @@ export const DATA = [
         players: [2, 3, 4, 5],
     },
 ];
+
+export const COMMENTS = [
+    {
+        author: "John Doe",
+        text: "Great game, I can really recommend",
+        rating: 9,
+    },
+    { author: "Jane Doe", text: "Not really in my type", rating: 5 },
+    {
+        author: "Walt Kowalski",
+        text: "Slightly boring, but overall ok",
+        rating: 7,
+    },
+    {
+        author: "John Smith",
+        text: "Best game ever",
+        rating: 10,
+    },
+    {
+        author: "Richard Patterson",
+        text: "",
+        rating: 3,
+    },
+];
