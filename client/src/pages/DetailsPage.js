@@ -11,6 +11,7 @@ import { DATA, COMMENTS } from "../dummy-data";
 import Paragraph from "../components/Paragraph";
 import Review from "../components/Review";
 import Comment from "../components/Comment";
+import SizedBox from "../components/SizedBox";
 
 const DetailsPage = (props) => {
     const [game, setGame] = useState();
@@ -41,6 +42,7 @@ const DetailsPage = (props) => {
                         mechanics={game.mechanics}
                     />
                     <Review />
+                    <SizedBox space="2" />
                     {COMMENTS.map((comment) => (
                         <Comment
                             key={comment.text}

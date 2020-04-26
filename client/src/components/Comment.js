@@ -1,5 +1,4 @@
 import React from "react";
-import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 
 const Comment = (props) => {
@@ -11,13 +10,13 @@ const Comment = (props) => {
     ));
 
     return (
-        <div>
+        <div className="comment-card">
             <Paragraph>{props.author}</Paragraph>
             <Paragraph>
                 Rated {props.rating} {filledStars}
                 {emptyStars}
             </Paragraph>
-            <Paragraph styles="mb-2">{props.text}</Paragraph>
+            <Paragraph>{props.text}</Paragraph>
         </div>
     );
 };
