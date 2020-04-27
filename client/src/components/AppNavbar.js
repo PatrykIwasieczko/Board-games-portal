@@ -13,7 +13,7 @@ const AppNavbar = () => {
                     <NavLink to="/rank">Top Games</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/">Search</NavLink>
+                    <NavLink to="/search">Search</NavLink>
                 </li>
                 <li>
                     <NavLink to="/">Forum</NavLink>

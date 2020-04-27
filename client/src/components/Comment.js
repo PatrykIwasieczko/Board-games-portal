@@ -12,7 +12,7 @@ const Comment = (props) => {
     return (
         <div className="comment-card">
             <Paragraph>{props.author}</Paragraph>
-            <Paragraph>
+            <Paragraph styles="mb-1">
                 Rated {props.rating} {filledStars}
                 {emptyStars}
             </Paragraph>

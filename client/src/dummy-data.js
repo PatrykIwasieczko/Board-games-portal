@@ -164,3 +164,13 @@ export const COMMENTS = [
         rating: 3,
     },
 ];
+
+export const CATEGORIES = [
+    "Adventure",
+    "Family",
+    "Strategy",
+    "Sci-Fi",
+    "Fantasy",
+    "Legacy",
+    "Logic",
+];
