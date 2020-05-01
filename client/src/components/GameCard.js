@@ -9,6 +9,9 @@ const GameCard = (props) => {
             className={props.styles ? `game-card ${props.styles}` : "game-card"}
         >
             <Heading>{props.title}</Heading>
+            <div className="image">
+                <img src={props.img} alt="" />
+            </div>
             <div className="ratings my-2">
                 <ListItem title="Our Rating" text={props.ourRating} />
                 <ListItem title="Players Rating" text={props.playersRating} />

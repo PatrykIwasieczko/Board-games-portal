@@ -1,7 +1,7 @@
 export const DATA = [
     {
         id: 1,
-        img: "",
+        img: "/images/gloomhaven.jpg",
         title: "Gloomhaven (2017)",
         playersRating: "8.8",
         ourRating: "9.0",
@@ -15,7 +15,7 @@ export const DATA = [
     },
     {
         id: 2,
-        img: "",
+        img: "/images/pandemic-legacy.jpg",
         title: "Pandemic Legacy: Season 1 (2015)",
         playersRating: "8.7",
         ourRating: "8.5",
@@ -29,7 +29,7 @@ export const DATA = [
     },
     {
         id: 3,
-        img: "",
+        img: "/images/terra-mystica.jpg",
         title: "Terra Mystica (2017)",
         playersRating: "8.3",
         ourRating: "9.0",
@@ -43,7 +43,7 @@ export const DATA = [
     },
     {
         id: 4,
-        img: "",
+        img: "/images/terraforming-mars.jpg",
         title: "Terraforming Mars (2016)",
         playersRating: "8.2",
         ourRating: "10.0",
@@ -57,7 +57,7 @@ export const DATA = [
     },
     {
         id: 5,
-        img: "",
+        img: "/images/star-wars-rebellion.jpg",
         title: "Star Wars: Rebellion (2016)",
         playersRating: "8.5",
         ourRating: "7.5",
@@ -71,7 +71,7 @@ export const DATA = [
     },
     {
         id: 6,
-        img: "",
+        img: "/images/gaia-project.jpg",
         title: "Gaia Project (2017)",
         playersRating: "8.4",
         ourRating: "9.0",
@@ -85,7 +85,7 @@ export const DATA = [
     },
     {
         id: 7,
-        img: "",
+        img: "/images/scythe.jpg",
         title: "Scythe (2016)",
         playersRating: "8.8",
         ourRating: "9.5",
@@ -99,7 +99,7 @@ export const DATA = [
     },
     {
         id: 8,
-        img: "",
+        img: "/images/7-wonders-duel.jpg",
         title: "7 Wonders Duel (2015)",
         playersRating: "8.9",
         ourRating: "7.0",
@@ -113,7 +113,7 @@ export const DATA = [
     },
     {
         id: 9,
-        img: "",
+        img: "/images/wingspan.jpg",
         title: "Wingspan (2019)",
         playersRating: "7.8",
         ourRating: "9.0",
@@ -127,7 +127,7 @@ export const DATA = [
     },
     {
         id: 10,
-        img: "",
+        img: "/images/blood-rage.jpg",
         title: "Blood Rage (2015)",
         playersRating: "8.0",
         ourRating: "8.0",

@@ -29,6 +29,7 @@ const RankPage = () => {
                         playersRating={item.playersRating}
                         ourRating={item.ourRating}
                         votersCount={item.votersCount}
+                        img={item.img}
                     />
                 ))}
             </div>

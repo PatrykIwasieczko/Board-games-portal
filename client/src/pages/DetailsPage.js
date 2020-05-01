@@ -40,6 +40,7 @@ const DetailsPage = (props) => {
                         complexity={game.complexity}
                         categories={game.categories}
                         mechanics={game.mechanics}
+                        img={game.img}
                     />
                     <Review />
                     <SizedBox space="2" />

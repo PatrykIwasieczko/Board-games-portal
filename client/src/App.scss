@@ -126,9 +126,15 @@ a {
             padding: 0.5rem;
             border: 1px solid $primary-color;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         p:nth-child(4n - 3) {
-            text-align: left;
+            justify-content: left;
+        }
+        img {
+            max-width: 10%;
         }
     }
 }
@@ -152,6 +158,14 @@ a {
         text-align: center;
         align-items: center;
     }
+    .image {
+        display: flex;
+        justify-content: space-around;
+        img {
+            max-width: 33%;
+            height: auto;
+        }
+    }
 }
 
 .comment-card {
@@ -161,6 +175,6 @@ a {
     margin-top: 1rem;
 }
 
-//
-//
-//
+.ant-list-empty-text {
+    display: none;
+}

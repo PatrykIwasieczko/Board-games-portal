@@ -9,6 +9,7 @@ const SingleGame = (props) => {
     return (
         <div>
             <Paragraph styles="left-align">
+                <img src={props.img} alt="" />
                 <NavLink to={props.link}>{props.title}</NavLink>
             </Paragraph>
             <Paragraph>{props.playersRating}</Paragraph>

@@ -11,16 +11,21 @@ import {
 } from "../dummy-data";
 import Paragraph from "../components/Paragraph";
 
-import { Select, Input } from "antd";
+import { Select, Button, List, Avatar } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import SizedBox from "../components/SizedBox";
+import GameCardItem from "../components/GameCardItem";
+import { NavLink } from "react-router-dom";
 
 const { Option } = Select;
 
 const SearchPage = () => {
-    const [games, setGames] = useState();
+    const [games, setGames] = useState([]);
     const [categories, setCategories] = useState();
     const [mechanics, setMechanics] = useState();
     const [numberOfPlayers, setNumberOfPlayers] = useState();
     const [playingTime, setPlayingTime] = useState();
+    const [searchDone, setSearchDone] = useState(false);
 
     const categoriesList = CATEGORIES.map((category) => {
         return <Option key={category}>{category}</Option>;
@@ -49,8 +54,14 @@ const SearchPage = () => {
                         );
                     });
                 };
-
-                if (!numberOfPlayers && !mechanics && !categories) {
+                if (
+                    !numberOfPlayers &&
+                    !mechanics &&
+                    !categories &&
+                    !playingTime
+                ) {
+                    return game;
+                } else if (!numberOfPlayers && !mechanics && !categories) {
                     return checkGameTime();
                 } else if (!numberOfPlayers && !playingTime && !categories) {
                     return checker(game.mechanics, mechanics);
@@ -120,6 +131,7 @@ const SearchPage = () => {
                 }
             })
         );
+        setSearchDone(true);
     };
     return (
         <Container>
@@ -156,11 +168,38 @@ const SearchPage = () => {
             >
                 {playingTimeList}
             </Select>
-            <button onClick={searchGame}>Search</button>
-            {games &&
-                games.map((game) => (
-                    <Paragraph key={game.id}>{game.title}</Paragraph>
-                ))}
+            <SizedBox space="1" />
+            <Button
+                onClick={searchGame}
+                type="primary"
+                icon={<SearchOutlined />}
+            >
+                Search
+            </Button>
+            <SizedBox space="1" />
+            {games.length === 0 && searchDone ? (
+                <Paragraph>
+                    No games found. Try to readjust search parameters
+                </Paragraph>
+            ) : (
+                <List
+                    itemLayout="horizontal"
+                    dataSource={games}
+                    renderItem={(game) => (
+                        <List.Item>
+                            <List.Item.Meta
+                                avatar={<Avatar src={game.img} size="large" />}
+                                title={
+                                    <NavLink to={`/game/${game.id}`}>
+                                        {game.title}
+                                    </NavLink>
+                                }
+                                // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                            />
+                        </List.Item>
+                    )}
+                />
+            )}
         </Container>
     );
 };
