@@ -8,6 +8,7 @@ import Paragraph from "../components/Paragraph";
 const SingleGame = (props) => {
     return (
         <div className="headers">
+            <Paragraph>{props.rank}</Paragraph>
             <Paragraph styles="left-align">
                 <img src={props.img} alt="" />
                 <NavLink to={props.link}>{props.title}</NavLink>

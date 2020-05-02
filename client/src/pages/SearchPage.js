@@ -147,6 +147,7 @@ const SearchPage = () => {
             >
                 {categoriesList}
             </Select>
+            <SizedBox space="1" />
             <Select
                 mode="multiple"
                 style={{ width: "100%" }}
@@ -155,6 +156,7 @@ const SearchPage = () => {
             >
                 {mechanicsList}
             </Select>
+            <SizedBox space="1" />
             <Select
                 mode="multiple"
                 style={{ width: "100%" }}
@@ -163,6 +165,7 @@ const SearchPage = () => {
             >
                 {numberOfPlayersList}
             </Select>
+            <SizedBox space="1" />
             <Select
                 mode="multiple"
                 style={{ width: "100%" }}
@@ -187,7 +190,9 @@ const SearchPage = () => {
             ) : (
                 <List
                     itemLayout="horizontal"
-                    dataSource={games}
+                    dataSource={games.sort(
+                        (a, b) => b.playersRating - a.playersRating
+                    )}
                     renderItem={(game) => (
                         <List.Item>
                             <List.Item.Meta
@@ -197,7 +202,7 @@ const SearchPage = () => {
                                         {game.title}
                                     </NavLink>
                                 }
-                                // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                description={game.playersRating}
                             />
                         </List.Item>
                     )}
