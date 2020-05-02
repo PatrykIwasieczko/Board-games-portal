@@ -16,7 +16,7 @@ const AppNavbar = () => {
                     <NavLink to="/search">Search</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/">Forum</NavLink>
+                    <NavLink to="/forum">Forum</NavLink>
                 </li>
             </ul>
         </div>

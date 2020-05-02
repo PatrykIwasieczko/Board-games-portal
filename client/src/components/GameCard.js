@@ -1,14 +1,46 @@
-import React from "react";
+// React
+import React, { useState } from "react";
+
+// Components
 import Heading from "./Heading";
 import Paragraph from "./Paragraph";
 import ListItem from "./ListItem";
 
+// Antd
+import { Button } from "antd";
+import { StarOutlined } from "@ant-design/icons";
+import RateModal from "./RateModal";
+
 const GameCard = (props) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = (e) => {
+        console.log(e);
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = (e) => {
+        console.log(e);
+        setIsModalVisible(false);
+    };
     return (
         <div
             className={props.styles ? `game-card ${props.styles}` : "game-card"}
         >
-            <Heading>{props.title}</Heading>
+            <Heading>
+                {props.title}{" "}
+                <Button
+                    onClick={showModal}
+                    type="primary"
+                    icon={<StarOutlined />}
+                >
+                    Rate
+                </Button>
+            </Heading>
             <div className="image">
                 <img src={props.img} alt="" />
             </div>
@@ -28,6 +60,11 @@ const GameCard = (props) => {
                 <Paragraph styles="my-1">
                     Mechanics: {props.mechanics.join(", ")}
                 </Paragraph>
+                <RateModal
+                    isModalVisible={isModalVisible}
+                    handleOk={handleOk}
+                    handleCancel={handleCancel}
+                />
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ import MainPage from "./pages/MainPage";
 import RankPage from "./pages/RankPage";
 import DetailsPage from "./pages/DetailsPage";
 import SearchPage from "./pages/SearchPage";
+import ForumPage from "./pages/ForumPage";
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                 <Route exact path="/" component={MainPage} />
                 <Route exact path="/rank" component={RankPage} />
                 <Route exact path="/search" component={SearchPage} />
+                <Route exact path="/forum" component={ForumPage} />
                 <Route exact path="/game/:id" component={DetailsPage} />
             </Switch>
         </BrowserRouter>

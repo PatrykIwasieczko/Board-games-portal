@@ -8,7 +8,7 @@ import Container from "../components/Container";
 const MainPage = () => {
     return (
         <Container styles="pt-2">
-            <Heading>Hello world</Heading>
+            <Heading>Main Page</Heading>
         </Container>
     );
 };

@@ -1,7 +1,17 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+// Components
 import Heading from "../components/Heading";
 import Container from "../components/Container";
+import Paragraph from "../components/Paragraph";
+import SizedBox from "../components/SizedBox";
 
+// Antd
+import { Select, Button, List, Avatar } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
+// DATA
 import {
     DATA,
     CATEGORIES,
@@ -9,13 +19,6 @@ import {
     NUM_PLAYERS,
     TIME_PLAYING,
 } from "../dummy-data";
-import Paragraph from "../components/Paragraph";
-
-import { Select, Button, List, Avatar } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import SizedBox from "../components/SizedBox";
-import GameCardItem from "../components/GameCardItem";
-import { NavLink } from "react-router-dom";
 
 const { Option } = Select;
 
