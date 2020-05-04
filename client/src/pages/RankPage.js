@@ -37,6 +37,10 @@ const RankPage = () => {
                     <Paragraph styles="clickable">Number of voters</Paragraph>
                 </div>
                 {DATA.sort((a, b) => b.playersRating - a.playersRating)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 55742d38d734618e5f21755044890996647b55a4
                     .map((item, index) => (
                         <SingleGame
                             rank={index + 1}

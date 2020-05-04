@@ -18,13 +18,11 @@ const GameCard = (props) => {
         setIsModalVisible(true);
     };
 
-    const handleOk = (e) => {
-        console.log(e);
+    const handleOk = (rating, review) => {
         setIsModalVisible(false);
     };
 
     const handleCancel = (e) => {
-        console.log(e);
         setIsModalVisible(false);
     };
 
