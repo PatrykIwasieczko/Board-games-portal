@@ -1,0 +1,30 @@
+{
+    "name": "board-game-portal",
+    "version": "1.0.0",
+    "description": "My portal about board games, where you can look for inspiration for new game purchase and talk with another geeks about your hobby.",
+    "main": "server.js",
+    "scripts": {
+        "server": "nodemon server.js",
+        "client": "npm start --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PatrykIwasieczko/Board-games-portal.git"
+    },
+    "author": "Patryk Iwasieczko",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/PatrykIwasieczko/Board-games-portal/issues"
+    },
+    "homepage": "https://github.com/PatrykIwasieczko/Board-games-portal#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.9.11"
+    },
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "config": "^3.3.1",
+        "nodemon": "^2.0.3"
+    }
+}

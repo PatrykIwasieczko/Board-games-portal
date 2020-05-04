@@ -122,7 +122,7 @@ a {
     .headers,
     ul {
         display: grid;
-        grid-template-columns: 4fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 8fr 1fr 1fr 1fr;
         p {
             padding: 0.5rem;
             border: 1px solid $primary-color;
@@ -131,7 +131,7 @@ a {
             align-items: center;
             justify-content: center;
         }
-        p:nth-child(4n - 3) {
+        p:nth-child(5n - 3) {
             justify-content: left;
         }
         img {
@@ -141,8 +141,13 @@ a {
 }
 
 .game-card {
+    margin-top: 6rem;
     display: flex;
     flex-direction: column;
+    border: 1px solid $primary-color;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-bottom: 2rem;
 
     .ratings {
         display: flex;
@@ -150,6 +155,30 @@ a {
         justify-content: space-around;
         text-align: center;
         align-items: center;
+
+        .list-item {
+            padding: 1rem;
+            border-radius: 20px;
+        }
+
+        .green {
+            background-color: #729d39;
+            color: $light-color;
+        }
+
+        .light-green {
+            background-color: #17b978;
+            color: $light-color;
+        }
+        .yellow {
+            background-color: #efd510;
+        }
+        .orange {
+            background-color: #ec610a;
+        }
+        .red {
+            background-color: #e84a5f;
+        }
     }
 
     .game-details {
@@ -158,6 +187,12 @@ a {
         justify-content: space-around;
         text-align: center;
         align-items: center;
+
+        .list-item {
+            border: 1px solid $primary-color;
+            border-radius: 20px;
+            padding: 1rem;
+        }
     }
     .image {
         display: flex;
@@ -178,4 +213,13 @@ a {
 
 .ant-list-empty-text {
     display: none;
+}
+
+.form-container {
+    width: 50%;
+    margin: 2rem auto;
+
+    button {
+        width: 100%;
+    }
 }

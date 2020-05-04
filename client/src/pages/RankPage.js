@@ -30,15 +30,16 @@ const RankPage = () => {
             <Heading styles="py-2">RankPage</Heading>
             <div className="rank-table">
                 <div className="headers">
+                    <Paragraph>Rank</Paragraph>
                     <Paragraph styles="left-align clickable">Title</Paragraph>
                     <Paragraph styles="clickable">Players Rating</Paragraph>
                     <Paragraph styles="clickable">Our Rating</Paragraph>
                     <Paragraph styles="clickable">Number of voters</Paragraph>
                 </div>
                 {DATA.sort((a, b) => b.playersRating - a.playersRating)
-                    .slice(minValue, maxValue)
-                    .map((item) => (
+                    .map((item, index) => (
                         <SingleGame
+                            rank={index + 1}
                             key={item.id}
                             link={`/game/${item.id}`}
                             title={item.title}
@@ -47,7 +48,8 @@ const RankPage = () => {
                             votersCount={item.votersCount}
                             img={item.img}
                         />
-                    ))}
+                    ))
+                    .slice(minValue, maxValue)}
             </div>
             <Pagination
                 defaultCurrent={1}

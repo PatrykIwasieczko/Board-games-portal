@@ -4,6 +4,10 @@ $primary-color: #a2d5f2;
 $primary-dark-color: #07689f;
 $accent-color: #ff7e67;
 
+.ant-btn-primary {
+    background-color: $primary-dark-color;
+}
+
 // Margin & Padding
 $spaceamounts: (1, 2, 3, 4, 5);
 

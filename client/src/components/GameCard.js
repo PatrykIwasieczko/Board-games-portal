@@ -27,6 +27,20 @@ const GameCard = (props) => {
         console.log(e);
         setIsModalVisible(false);
     };
+
+    const changeRateStyles = (rating) => {
+        if (rating >= 8.5) {
+            return "green";
+        } else if (rating >= 7.5) {
+            return "light-green";
+        } else if (rating >= 6) {
+            return "yellow";
+        } else if (rating >= 4) {
+            return "orange";
+        } else {
+            return "red";
+        }
+    };
     return (
         <div
             className={props.styles ? `game-card ${props.styles}` : "game-card"}
@@ -45,12 +59,31 @@ const GameCard = (props) => {
                 <img src={props.img} alt="" />
             </div>
             <div className="ratings my-2">
-                <ListItem title="Our Rating" text={props.ourRating} />
-                <ListItem title="Players Rating" text={props.playersRating} />
+                <ListItem
+                    styles={changeRateStyles(props.ourRating)}
+                    title="Our Rating"
+                    text={props.ourRating}
+                />
+                <ListItem
+                    styles={changeRateStyles(props.playersRating)}
+                    title="Players Rating"
+                    text={props.playersRating}
+                />
             </div>
             <div className="game-details my-2">
-                <ListItem title="Players" text={props.players.join(", ")} />
-                <ListItem title="Playing Time" text={props.playingTime} />
+                <ListItem
+                    title="Players"
+                    text={
+                        props.players.length > 1
+                            ? `${props.players[0]} -
+                                  ${props.players[props.players.length - 1]}`
+                            : props.players
+                    }
+                />
+                <ListItem
+                    title="Playing Time"
+                    text={`${props.playingTime} min`}
+                />
                 <ListItem title="Complexity" text={props.complexity} />
             </div>
             <div>
