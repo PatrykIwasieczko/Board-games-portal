@@ -49,6 +49,7 @@ app.use(
 
         type gameQuery {
             games: [Game!]!
+            game(id: ID!): Game
         }
 
         type gameMutation {
@@ -65,6 +66,16 @@ app.use(
                 return Game.find()
                     .then((games) => {
                         return games;
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
+            },
+
+            game: (args) => {
+                return Game.findById(args.id)
+                    .then((game) => {
+                        return game;
                     })
                     .catch((err) => {
                         throw err;

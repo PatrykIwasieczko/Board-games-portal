@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 // Components
 import Container from "../components/Container";
-// import Heading from "../components/Heading";
 import GameCard from "../components/GameCard";
 
 // DATA
