@@ -24,6 +24,7 @@ app.use(
 
         type Game {
             _id: ID!
+            img: String
             title: String!
             ourRating: String
             playersRating: String

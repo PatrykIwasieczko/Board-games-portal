@@ -45,6 +45,9 @@ const gameSchema = new Schema({
         type: String,
         required: true,
     },
+    img: {
+        type: String,
+    },
     ourRating: {
         type: String,
         default: "0",

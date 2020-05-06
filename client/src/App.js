@@ -15,20 +15,36 @@ import ForumPage from "./pages/ForumPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
+// GraphQL
+import { ApolloProvider } from "react-apollo";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+
+const httpLink = createHttpLink({
+    uri: "http://localhost:4000",
+});
+const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+});
+
 const App = () => {
     return (
-        <BrowserRouter>
-            <AppNavbar />
-            <Switch>
-                <Route exact path="/" component={MainPage} />
-                <Route exact path="/rank" component={RankPage} />
-                <Route exact path="/search" component={SearchPage} />
-                <Route exact path="/forum" component={ForumPage} />
-                <Route exact path="/login" component={LoginPage} />
-                <Route exact path="/register" component={RegisterPage} />
-                <Route exact path="/game/:id" component={DetailsPage} />
-            </Switch>
-        </BrowserRouter>
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <AppNavbar />
+                <Switch>
+                    <Route exact path="/" component={MainPage} />
+                    <Route exact path="/rank" component={RankPage} />
+                    <Route exact path="/search" component={SearchPage} />
+                    <Route exact path="/forum" component={ForumPage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path="/game/:id" component={DetailsPage} />
+                </Switch>
+            </BrowserRouter>
+        </ApolloProvider>
     );
 };
 
