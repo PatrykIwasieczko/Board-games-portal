@@ -7,11 +7,7 @@ import Container from "../components/Container";
 import Heading from "../components/Heading";
 
 // Antd
-<<<<<<< HEAD
 import { Form, Input, Button } from "antd";
-=======
-import { Form, Input, Button, Checkbox } from "antd";
->>>>>>> 55742d38d734618e5f21755044890996647b55a4
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const LoginPage = () => {

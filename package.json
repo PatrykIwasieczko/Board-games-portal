@@ -19,7 +19,14 @@
     },
     "homepage": "https://github.com/PatrykIwasieczko/Board-games-portal#readme",
     "dependencies": {
+        "axios": "^0.19.2",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
+        "express-graphql": "^0.9.0",
+        "graphql": "^15.0.0",
+        "graphql-server-express": "^1.4.1",
+        "graphql-tools": "^5.0.0",
         "mongoose": "^5.9.11"
     },
     "devDependencies": {
