@@ -1,45 +1,61 @@
 // React
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 // Components
 import Container from "../components/Container";
 import GameCard from "../components/GameCard";
 
 // DATA
-import { DATA, COMMENTS } from "../dummy-data";
-import Paragraph from "../components/Paragraph";
+import { COMMENTS } from "../dummy-data";
+
+// Components
 import Review from "../components/Review";
 import Comment from "../components/Comment";
 import SizedBox from "../components/SizedBox";
 
-const DetailsPage = (props) => {
-    const [game, setGame] = useState();
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        const id = props.match.params.id;
-        const currentGame = DATA.find((item) => {
-            return item.id === parseInt(id);
-        });
-        setGame(currentGame);
-        setLoading(false);
-    }, [props.match.params.id, game]);
+// GraphQL
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const GET_GAME = gql`
+    query game($id: ID!) {
+        game(id: $id) {
+            title
+            img
+            playersRating
+            ourRating
+            votersCount
+            categories
+            mechanics
+            complexity
+            players
+            playingTime
+        }
+    }
+`;
+
+const DetailsPage = (props, id) => {
+    const { data, loading, error } = useQuery(GET_GAME, {
+        variables: { id: props.match.params.id },
+    });
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error</p>;
     return (
         <>
-            {loading ? (
-                <Paragraph>Loading...</Paragraph>
-            ) : (
+            {data.game && (
                 <Container>
                     <GameCard
                         styles="pt-2"
-                        title={game.title}
-                        ourRating={game.ourRating}
-                        playersRating={game.playersRating}
-                        players={game.players}
-                        playingTime={game.playingTime}
-                        complexity={game.complexity}
-                        categories={game.categories}
-                        mechanics={game.mechanics}
-                        img={game.img}
+                        title={data.game.title}
+                        ourRating={data.game.ourRating}
+                        playersRating={data.game.playersRating}
+                        players={data.game.players}
+                        playingTime={data.game.playingTime}
+                        complexity={data.game.complexity}
+                        categories={data.game.categories}
+                        mechanics={data.game.mechanics}
+                        img={`/images/${data.game.img}`}
                     />
                     <Review />
                     <SizedBox space="2" />

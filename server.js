@@ -38,6 +38,7 @@ app.use(
             comments: [Comment]
             players: [String]
             ourReview: [String]
+            playingTime: String
         }
 
         input GameInput {
@@ -45,6 +46,7 @@ app.use(
             categories: [String]!
             mechanics: [String]!
             players: [String]!
+            playingTime: String!
         }
 
         type gameQuery {
@@ -87,6 +89,7 @@ app.use(
                     categories: args.gameInput.categories,
                     mechanics: args.gameInput.mechanics,
                     players: args.gameInput.players,
+                    playingTime: args.gameInput.playingTime,
                 });
 
                 return game

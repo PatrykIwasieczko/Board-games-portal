@@ -89,6 +89,10 @@ const gameSchema = new Schema({
     ourReview: {
         type: [String],
     },
+    playingTime: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("Game", gameSchema); // create and export the model
