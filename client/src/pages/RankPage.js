@@ -7,9 +7,25 @@ import Heading from "../components/Heading";
 import Paragraph from "../components/Paragraph";
 import SingleGame from "../components/SingleGame";
 
-// DATA
-import { DATA } from "../dummy-data";
+// Antd
 import { Pagination } from "antd";
+
+// GraphQL
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const GET_GAMES = gql`
+    {
+        games {
+            _id
+            title
+            img
+            playersRating
+            ourRating
+            votersCount
+        }
+    }
+`;
 
 const RankPage = () => {
     const numEachPage = 5;
@@ -25,6 +41,11 @@ const RankPage = () => {
             setMaxValue(value * 5);
         }
     };
+
+    const { data, loading, error } = useQuery(GET_GAMES);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error</p>;
     return (
         <Container>
             <Heading styles="py-2">RankPage</Heading>
@@ -36,20 +57,23 @@ const RankPage = () => {
                     <Paragraph styles="clickable">Our Rating</Paragraph>
                     <Paragraph styles="clickable">Number of voters</Paragraph>
                 </div>
-                {DATA.sort((a, b) => b.playersRating - a.playersRating)
-                    .map((item, index) => (
-                        <SingleGame
-                            rank={index + 1}
-                            key={item.id}
-                            link={`/game/${item.id}`}
-                            title={item.title}
-                            playersRating={item.playersRating}
-                            ourRating={item.ourRating}
-                            votersCount={item.votersCount}
-                            img={item.img}
-                        />
-                    ))
-                    .slice(minValue, maxValue)}
+                {data &&
+                    data.games &&
+                    data.games
+                        .sort((a, b) => b.playersRating - a.playersRating)
+                        .map((item, index) => (
+                            <SingleGame
+                                rank={index + 1}
+                                key={item._id}
+                                link={`/game/${item._id}`}
+                                title={item.title}
+                                playersRating={item.playersRating}
+                                ourRating={item.ourRating}
+                                votersCount={item.votersCount}
+                                img={`/images/${item.img}`}
+                            />
+                        ))
+                        .slice(minValue, maxValue)}
             </div>
             <Pagination
                 defaultCurrent={1}

@@ -4,11 +4,13 @@ const graphqlHttp = require("express-graphql");
 const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
 const config = require("config");
+const cors = require("cors");
 
 const Game = require("./models/game");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(
     "/graphql",
