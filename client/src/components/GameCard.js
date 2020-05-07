@@ -57,15 +57,19 @@ const GameCard = (props) => {
                 <img src={props.img} alt="" />
             </div>
             <div className="ratings my-2">
-                <ListItem
-                    styles={changeRateStyles(props.ourRating)}
-                    title="Our Rating"
-                    text={props.ourRating}
-                />
+                {props.ourRating === 0 ? (
+                    <ListItem
+                        styles={changeRateStyles(props.ourRating)}
+                        title="Our Rating"
+                        text={`${props.ourRating} / 10.0`}
+                    />
+                ) : (
+                    <ListItem title="No Review Yet" />
+                )}
                 <ListItem
                     styles={changeRateStyles(props.playersRating)}
                     title="Players Rating"
-                    text={props.playersRating}
+                    text={`${props.playersRating} / 10.0`}
                 />
             </div>
             <div className="game-details my-2">
@@ -82,7 +86,10 @@ const GameCard = (props) => {
                     title="Playing Time"
                     text={`${props.playingTime} min`}
                 />
-                <ListItem title="Complexity" text={props.complexity} />
+                <ListItem
+                    title="Complexity"
+                    text={`${props.complexity} / 10.0`}
+                />
             </div>
             <div>
                 <Paragraph styles="my-1">

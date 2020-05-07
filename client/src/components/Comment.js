@@ -12,12 +12,6 @@ const Comment = (props) => {
             <i key={i} className="far fa-star primary-dark"></i>
         ));
     };
-    // const filledStars = [...Array(+props.rating)].map((e, i) => (
-    //     <i key={i} className="fas fa-star primary-dark"></i>
-    // ));
-    // const emptyStars = [...Array(10 - +props.rating)].map((e, i) => (
-    //     <i key={i} className="far fa-star primary-dark"></i>
-    // ));
 
     return (
         <div className="comment-card">

@@ -5,9 +5,6 @@ import React from "react";
 import Container from "../components/Container";
 import GameCard from "../components/GameCard";
 
-// DATA
-import { COMMENTS } from "../dummy-data";
-
 // Components
 import Review from "../components/Review";
 import Comment from "../components/Comment";
