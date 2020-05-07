@@ -67,7 +67,20 @@ const RankPage = () => {
                                 key={item._id}
                                 link={`/game/${item._id}`}
                                 title={item.title}
-                                playersRating={item.playersRating}
+                                playersRating={
+                                    item.playersRating.length === 0
+                                        ? "0"
+                                        : (
+                                              item.playersRating.reduce(
+                                                  (a, b) => {
+                                                      return +a + +b;
+                                                  },
+                                                  0
+                                              ) / item.playersRating.length
+                                          )
+                                              .toFixed(1)
+                                              .toString()
+                                }
                                 ourRating={item.ourRating}
                                 votersCount={item.votersCount}
                                 img={`/images/${item.img}`}

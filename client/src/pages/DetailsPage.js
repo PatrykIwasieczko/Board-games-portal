@@ -49,10 +49,30 @@ const DetailsPage = (props, id) => {
                         styles="pt-2"
                         title={data.game.title}
                         ourRating={data.game.ourRating}
-                        playersRating={data.game.playersRating}
+                        playersRating={
+                            data.game.playersRating.length === 0
+                                ? "0"
+                                : (
+                                      data.game.playersRating.reduce((a, b) => {
+                                          return +a + +b;
+                                      }, 0) / data.game.playersRating.length
+                                  )
+                                      .toFixed(1)
+                                      .toString()
+                        }
                         players={data.game.players}
                         playingTime={data.game.playingTime}
-                        complexity={data.game.complexity}
+                        complexity={
+                            data.game.complexity.length === 0
+                                ? "0"
+                                : (
+                                      data.game.complexity.reduce((a, b) => {
+                                          return +a + +b;
+                                      }, 0) / data.game.complexity.length
+                                  )
+                                      .toFixed(1)
+                                      .toString()
+                        }
                         categories={data.game.categories}
                         mechanics={data.game.mechanics}
                         img={`/images/${data.game.img}`}

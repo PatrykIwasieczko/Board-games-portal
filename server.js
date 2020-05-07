@@ -7,6 +7,7 @@ const config = require("config");
 const cors = require("cors");
 
 const Game = require("./models/game");
+const Comment = require("./models/comment");
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,10 +30,9 @@ app.use(
             img: String
             title: String!
             ourRating: String
-            playersRating: String
+            playersRating: [String]
             votersCount: String
-            complexity: String
-            complexityCount: String
+            complexity: [String]
             categories: [String]
             mechanics: [String]
             comments: [Comment]
@@ -49,6 +49,13 @@ app.use(
             playingTime: String!
         }
 
+        input CommentInput {
+            author: String!
+            content: String
+            rating: String!
+            complexity: String
+        }
+
         type gameQuery {
             games: [Game!]!
             game(id: ID!): Game
@@ -56,6 +63,7 @@ app.use(
 
         type gameMutation {
             createGame(gameInput: GameInput): Game
+            commentGame(commentInput: CommentInput, id: ID!): Comment
         }
 
         schema {
@@ -82,6 +90,27 @@ app.use(
                     .catch((err) => {
                         throw err;
                     });
+            },
+            commentGame: async (args) => {
+                const game = await Game.findById(args.id);
+                const comment = new Comment({
+                    author: args.commentInput.author,
+                    content: args.commentInput.content,
+                    rating: args.commentInput.rating,
+                    complexity: args.commentInput.complexity,
+                });
+
+                await comment.save();
+                game.votersCount++;
+                // game.complexityCount++;
+                // (parseInt(game.complexity) += parseInt(
+                //     comment.complexity
+                // )).toString();
+                // (parseInt(game.rating) += parseInt(comment.rating)).toString();
+                game.complexity.push(comment.complexity);
+                game.playersRating.push(comment.rating);
+                game.comments.push(comment);
+                await game.save();
             },
             createGame: (args) => {
                 const game = new Game({

@@ -55,8 +55,8 @@ const gameSchema = new Schema({
         required: true,
     },
     playersRating: {
-        type: String,
-        default: "0",
+        type: [String],
+        default: [],
         required: true,
     },
     votersCount: {
@@ -64,12 +64,8 @@ const gameSchema = new Schema({
         default: "0",
     },
     complexity: {
-        type: String,
-        default: "0",
-    },
-    complexityCount: {
-        type: String,
-        default: "0",
+        type: [String],
+        default: [],
     },
     categories: {
         type: [String],
