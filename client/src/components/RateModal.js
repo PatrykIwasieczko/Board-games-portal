@@ -34,7 +34,6 @@ const RateModal = (props) => {
             onCancel={props.handleCancel}
         >
             <Rate
-                allowHalf
                 count={10}
                 tooltips={desc}
                 onChange={handleChange}

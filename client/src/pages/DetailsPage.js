@@ -30,6 +30,12 @@ const GET_GAME = gql`
             complexity
             players
             playingTime
+            comments {
+                author
+                rating
+                complexity
+                content
+            }
         }
     }
 `;
@@ -38,6 +44,16 @@ const DetailsPage = (props, id) => {
     const { data, loading, error } = useQuery(GET_GAME, {
         variables: { id: props.match.params.id },
     });
+
+    const getAverageFromArray = (arr) => {
+        return (
+            arr.reduce((a, b) => {
+                return +a + +b;
+            }, 0) / arr.length
+        )
+            .toFixed(1)
+            .toString();
+    };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error</p>;
@@ -52,26 +68,14 @@ const DetailsPage = (props, id) => {
                         playersRating={
                             data.game.playersRating.length === 0
                                 ? "0"
-                                : (
-                                      data.game.playersRating.reduce((a, b) => {
-                                          return +a + +b;
-                                      }, 0) / data.game.playersRating.length
-                                  )
-                                      .toFixed(1)
-                                      .toString()
+                                : getAverageFromArray(data.game.playersRating)
                         }
                         players={data.game.players}
                         playingTime={data.game.playingTime}
                         complexity={
                             data.game.complexity.length === 0
                                 ? "0"
-                                : (
-                                      data.game.complexity.reduce((a, b) => {
-                                          return +a + +b;
-                                      }, 0) / data.game.complexity.length
-                                  )
-                                      .toFixed(1)
-                                      .toString()
+                                : getAverageFromArray(data.game.complexity)
                         }
                         categories={data.game.categories}
                         mechanics={data.game.mechanics}
@@ -79,12 +83,13 @@ const DetailsPage = (props, id) => {
                     />
                     <Review />
                     <SizedBox space="2" />
-                    {COMMENTS.map((comment) => (
+                    {data.game.comments.map((comment) => (
                         <Comment
-                            key={comment.text}
+                            key={comment._id}
                             author={comment.author}
-                            text={comment.text}
+                            text={comment.content}
                             rating={comment.rating}
+                            complexity={comment.complexity}
                         />
                     ))}
                 </Container>

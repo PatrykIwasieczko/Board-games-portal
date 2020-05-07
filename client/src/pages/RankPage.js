@@ -42,6 +42,16 @@ const RankPage = () => {
         }
     };
 
+    const getAverageFromArray = (arr) => {
+        return (
+            arr.reduce((a, b) => {
+                return +a + +b;
+            }, 0) / arr.length
+        )
+            .toFixed(1)
+            .toString();
+    };
+
     const { data, loading, error } = useQuery(GET_GAMES);
 
     if (loading) return <p>Loading...</p>;
@@ -70,16 +80,9 @@ const RankPage = () => {
                                 playersRating={
                                     item.playersRating.length === 0
                                         ? "0"
-                                        : (
-                                              item.playersRating.reduce(
-                                                  (a, b) => {
-                                                      return +a + +b;
-                                                  },
-                                                  0
-                                              ) / item.playersRating.length
+                                        : getAverageFromArray(
+                                              item.playersRating
                                           )
-                                              .toFixed(1)
-                                              .toString()
                                 }
                                 ourRating={item.ourRating}
                                 votersCount={item.votersCount}
