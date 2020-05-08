@@ -23,6 +23,7 @@ app.use(
             content: String
             rating: String
             complexity: String
+            date: String
         }
 
         type Game {
@@ -102,11 +103,6 @@ app.use(
 
                 await comment.save();
                 game.votersCount++;
-                // game.complexityCount++;
-                // (parseInt(game.complexity) += parseInt(
-                //     comment.complexity
-                // )).toString();
-                // (parseInt(game.rating) += parseInt(comment.rating)).toString();
                 game.complexity.push(comment.complexity);
                 game.playersRating.push(comment.rating);
                 game.comments.push(comment);

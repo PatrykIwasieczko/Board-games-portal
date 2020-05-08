@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 import { Modal, Input, Rate } from "antd";
+import SizedBox from "./SizedBox";
 
-const desc = [
+const rates = [
     "would never play again",
     "terrible",
     "very bad",
@@ -14,13 +15,29 @@ const desc = [
     "fantastic",
     "the best game",
 ];
+const complexities = [
+    "no complexity",
+    "very easy",
+    "family level game",
+    "easy",
+    "average",
+    "average, but has some complex rules",
+    "easy to learn hard to master",
+    "complex",
+    "very complex",
+    "takes a lot of time to understand",
+];
 
 const RateModal = (props) => {
     const [rateValue, setRateValue] = useState(5);
+    const [complexityValue, setComplexityValue] = useState(5);
     const [review, setReview] = useState();
 
-    const handleChange = (value) => {
+    const handleRateChange = (value) => {
         setRateValue(value);
+    };
+    const handleComplexityChange = (value) => {
+        setComplexityValue(value);
     };
 
     const handleReviewChange = (event) => {
@@ -30,16 +47,32 @@ const RateModal = (props) => {
         <Modal
             title="Rate a game"
             visible={props.isModalVisible}
-            onOk={() => props.handleOk(rateValue, review)}
+            onOk={() =>
+                props.handleOk({
+                    author: "Author",
+                    rating: rateValue.toString(),
+                    content: review,
+                    complexity: complexityValue.toString(),
+                })
+            }
             onCancel={props.handleCancel}
         >
+            Rating:{" "}
             <Rate
                 count={10}
-                tooltips={desc}
-                onChange={handleChange}
+                tooltips={rates}
+                onChange={handleRateChange}
                 value={rateValue}
             />
-
+            <SizedBox />
+            Complexity:{" "}
+            <Rate
+                count={10}
+                tooltips={complexities}
+                onChange={handleComplexityChange}
+                value={complexityValue}
+            />
+            <SizedBox space="1" />
             <Input
                 placeholder="Write your opinion about this game"
                 onChange={handleReviewChange}

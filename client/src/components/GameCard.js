@@ -11,15 +11,37 @@ import { Button } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import RateModal from "./RateModal";
 
+// GraphQL
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
+
+const POST_COMMENT = gql`
+    mutation commentGame($id: ID!, $commentInput: CommentInput) {
+        commentGame(id: $id, commentInput: $commentInput) {
+            author
+            rating
+            content
+            complexity
+        }
+    }
+`;
+
 const GameCard = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [addComment] = useMutation(POST_COMMENT);
 
     const showModal = () => {
         setIsModalVisible(true);
     };
 
-    const handleOk = (rating, review) => {
+    const handleOk = (input) => {
         setIsModalVisible(false);
+        addComment({
+            variables: {
+                id: props.gameId,
+                commentInput: input,
+            },
+        });
     };
 
     const handleCancel = (e) => {

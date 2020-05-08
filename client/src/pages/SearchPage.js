@@ -13,21 +13,40 @@ import { SearchOutlined } from "@ant-design/icons";
 
 // DATA
 import {
-    DATA,
     CATEGORIES,
     MECHANICS,
     NUM_PLAYERS,
     TIME_PLAYING,
 } from "../dummy-data";
 
+// GraphQL
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+const GET_GAMES = gql`
+    {
+        games {
+            _id
+            title
+            img
+            playersRating
+            playingTime
+            mechanics
+            categories
+            players
+            img
+        }
+    }
+`;
+
 const { Option } = Select;
 
 const SearchPage = () => {
     const [games, setGames] = useState([]);
-    const [categories, setCategories] = useState();
-    const [mechanics, setMechanics] = useState();
-    const [numberOfPlayers, setNumberOfPlayers] = useState();
-    const [playingTime, setPlayingTime] = useState();
+    const [categories, setCategories] = useState([]);
+    const [mechanics, setMechanics] = useState([]);
+    const [numberOfPlayers, setNumberOfPlayers] = useState([]);
+    const [playingTime, setPlayingTime] = useState([]);
     const [searchDone, setSearchDone] = useState(false);
 
     const categoriesList = CATEGORIES.map((category) => {
@@ -43,11 +62,26 @@ const SearchPage = () => {
         return <Option key={playTime}>{playTime}</Option>;
     });
 
+    const { data, loading, error } = useQuery(GET_GAMES);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error</p>;
+
+    const getAverageFromArray = (arr) => {
+        return (
+            arr.reduce((a, b) => {
+                return +a + +b;
+            }, 0) / arr.length
+        )
+            .toFixed(1)
+            .toString();
+    };
+
     const searchGame = () => {
         let checker = (arr, target) => target.some((val) => arr.includes(val));
 
         setGames(
-            DATA.filter((game) => {
+            data.games.filter((game) => {
                 const gamesTimes = game.playingTime.split("-");
                 const numeralTimes = gamesTimes.map((time) => +time);
                 const checkGameTime = () => {
@@ -58,67 +92,92 @@ const SearchPage = () => {
                     });
                 };
                 if (
-                    !numberOfPlayers &&
-                    !mechanics &&
-                    !categories &&
-                    !playingTime
+                    !numberOfPlayers.length > 0 &&
+                    !mechanics.length > 0 &&
+                    !categories.length > 0 &&
+                    !playingTime.length > 0
                 ) {
                     return game;
-                } else if (!numberOfPlayers && !mechanics && !categories) {
+                } else if (
+                    !numberOfPlayers.length > 0 &&
+                    !mechanics.length > 0 &&
+                    !categories.length > 0
+                ) {
                     return checkGameTime();
-                } else if (!numberOfPlayers && !playingTime && !categories) {
+                } else if (
+                    !numberOfPlayers.length > 0 &&
+                    !playingTime.length > 0 &&
+                    !categories.length > 0
+                ) {
                     return checker(game.mechanics, mechanics);
-                } else if (!playingTime && !categories && !mechanics) {
+                } else if (
+                    !playingTime.length > 0 &&
+                    !categories.length > 0 &&
+                    !mechanics.length > 0
+                ) {
                     return checker(game.players, numberOfPlayers);
-                } else if (!playingTime && !numberOfPlayers && !mechanics) {
+                } else if (
+                    !playingTime.length > 0 &&
+                    !numberOfPlayers.length > 0 &&
+                    !mechanics.length > 0
+                ) {
                     return checker(game.categories, categories);
-                } else if (!playingTime && !numberOfPlayers) {
+                } else if (
+                    !playingTime.length > 0 &&
+                    !numberOfPlayers.length > 0
+                ) {
                     return (
                         checker(game.categories, categories) &&
                         checker(game.mechanics, mechanics)
                     );
-                } else if (!playingTime && !mechanics) {
+                } else if (!playingTime.length > 0 && !mechanics.length > 0) {
                     return (
                         checker(game.categories, categories) &&
                         checker(game.players, numberOfPlayers)
                     );
-                } else if (!playingTime && !categories) {
+                } else if (!playingTime.length > 0 && !categories.length > 0) {
                     return (
                         checker(game.mechanics, mechanics) &&
                         checker(game.players, numberOfPlayers)
                     );
-                } else if (!numberOfPlayers && !mechanics) {
+                } else if (
+                    !numberOfPlayers.length > 0 &&
+                    !mechanics.length > 0
+                ) {
                     return (
                         checker(game.categories, categories) && checkGameTime()
                     );
-                } else if (!numberOfPlayers && !categories) {
+                } else if (
+                    !numberOfPlayers.length > 0 &&
+                    !categories.length > 0
+                ) {
                     return (
                         checker(game.mechanics, mechanics) && checkGameTime()
                     );
-                } else if (!mechanics && !categories) {
+                } else if (!mechanics.length > 0 && !categories.length > 0) {
                     return (
                         checker(game.players, numberOfPlayers) &&
                         checkGameTime()
                     );
-                } else if (!numberOfPlayers) {
+                } else if (!numberOfPlayers.length > 0) {
                     return (
                         checker(game.categories, categories) &&
                         checker(game.mechanics, mechanics) &&
                         checkGameTime()
                     );
-                } else if (!categories) {
+                } else if (!categories.length > 0) {
                     return (
                         checker(game.players, numberOfPlayers) &&
                         checker(game.mechanics, mechanics) &&
                         checkGameTime()
                     );
-                } else if (!mechanics) {
+                } else if (!mechanics.length > 0) {
                     return (
                         checker(game.players, numberOfPlayers) &&
                         checker(game.categories, categories) &&
                         checkGameTime()
                     );
-                } else if (!playingTime) {
+                } else if (!playingTime.length > 0) {
                     return (
                         checker(game.players, numberOfPlayers) &&
                         checker(game.categories, categories) &&
@@ -182,6 +241,7 @@ const SearchPage = () => {
             >
                 Search
             </Button>
+
             <SizedBox space="1" />
             {games.length === 0 && searchDone ? (
                 <Paragraph>
@@ -196,13 +256,24 @@ const SearchPage = () => {
                     renderItem={(game) => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src={game.img} size="large" />}
+                                avatar={
+                                    <Avatar
+                                        src={`/images/${game.img}`}
+                                        size="large"
+                                    />
+                                }
                                 title={
-                                    <NavLink to={`/game/${game.id}`}>
+                                    <NavLink to={`/game/${game._id}`}>
                                         {game.title}
                                     </NavLink>
                                 }
-                                description={game.playersRating}
+                                description={
+                                    game.playersRating.length > 0
+                                        ? getAverageFromArray(
+                                              game.playersRating
+                                          )
+                                        : null
+                                }
                             />
                         </List.Item>
                     )}

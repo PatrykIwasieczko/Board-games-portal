@@ -18,6 +18,10 @@ const commentSchema = new Schema({
     complexity: {
         type: String,
     },
+    date: {
+        type: String,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model("Comment", commentSchema); // create and export the model

@@ -77,6 +77,7 @@ const DetailsPage = (props, id) => {
                         categories={data.game.categories}
                         mechanics={data.game.mechanics}
                         img={`/images/${data.game.img}`}
+                        gameId={props.match.params.id}
                     />
                     <Review />
                     <SizedBox space="2" />
