@@ -14,6 +14,8 @@ import SizedBox from "../components/SizedBox";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 
+import { getAverageFromArray } from "../utils/helpers";
+
 const GET_GAME = gql`
     query game($id: ID!) {
         game(id: $id) {
@@ -43,16 +45,6 @@ const DetailsPage = (props, id) => {
         variables: { id: props.match.params.id },
     });
 
-    const getAverageFromArray = (arr) => {
-        return (
-            arr.reduce((a, b) => {
-                return +a + +b;
-            }, 0) / arr.length
-        )
-            .toFixed(1)
-            .toString();
-    };
-
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error</p>;
     return (
@@ -61,23 +53,17 @@ const DetailsPage = (props, id) => {
                 <Container>
                     <GameCard
                         styles="pt-2"
-                        title={data.game.title}
-                        ourRating={data.game.ourRating}
+                        game={data.game}
                         playersRating={
                             data.game.playersRating.length === 0
                                 ? "0"
                                 : getAverageFromArray(data.game.playersRating)
                         }
-                        players={data.game.players}
-                        playingTime={data.game.playingTime}
                         complexity={
                             data.game.complexity.length === 0
                                 ? "0"
                                 : getAverageFromArray(data.game.complexity)
                         }
-                        categories={data.game.categories}
-                        mechanics={data.game.mechanics}
-                        img={`/images/${data.game.img}`}
                         gameId={props.match.params.id}
                     />
                     <Review />

@@ -23,6 +23,9 @@ import {
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 
+// Utils
+import { getAverageFromArray } from "../utils/helpers";
+
 const GET_GAMES = gql`
     {
         games {
@@ -66,16 +69,6 @@ const SearchPage = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error</p>;
-
-    const getAverageFromArray = (arr) => {
-        return (
-            arr.reduce((a, b) => {
-                return +a + +b;
-            }, 0) / arr.length
-        )
-            .toFixed(1)
-            .toString();
-    };
 
     const searchGame = () => {
         let checker = (arr, target) => target.some((val) => arr.includes(val));

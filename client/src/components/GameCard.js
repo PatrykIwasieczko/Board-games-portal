@@ -15,6 +15,9 @@ import RateModal from "./RateModal";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 
+// Utils
+import { changeRateStyles } from "../utils/helpers";
+
 const POST_COMMENT = gql`
     mutation commentGame($id: ID!, $commentInput: CommentInput) {
         commentGame(id: $id, commentInput: $commentInput) {
@@ -27,6 +30,16 @@ const POST_COMMENT = gql`
 `;
 
 const GameCard = (props) => {
+    const {
+        title,
+        ourRating,
+        img,
+        playingTime,
+        categories,
+        mechanics,
+        players,
+    } = props.game;
+    const { complexity, playersRating } = props;
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [addComment] = useMutation(POST_COMMENT);
 
@@ -48,25 +61,12 @@ const GameCard = (props) => {
         setIsModalVisible(false);
     };
 
-    const changeRateStyles = (rating) => {
-        if (rating >= 8.5) {
-            return "green";
-        } else if (rating >= 7.5) {
-            return "light-green";
-        } else if (rating >= 6) {
-            return "yellow";
-        } else if (rating >= 4) {
-            return "orange";
-        } else {
-            return "red";
-        }
-    };
     return (
         <div
             className={props.styles ? `game-card ${props.styles}` : "game-card"}
         >
             <Heading>
-                {props.title}{" "}
+                {title}{" "}
                 <Button
                     onClick={showModal}
                     type="primary"
@@ -76,49 +76,43 @@ const GameCard = (props) => {
                 </Button>
             </Heading>
             <div className="image">
-                <img src={props.img} alt="" />
+                <img src={`/images/${img}`} alt="" />
             </div>
             <div className="ratings my-2">
-                {props.ourRating === 0 ? (
+                {ourRating === 0 ? (
                     <ListItem
-                        styles={changeRateStyles(props.ourRating)}
+                        styles={changeRateStyles(ourRating)}
                         title="Our Rating"
-                        text={`${props.ourRating} / 10.0`}
+                        text={`${ourRating} / 10.0`}
                     />
                 ) : (
                     <ListItem title="No Review Yet" />
                 )}
                 <ListItem
-                    styles={changeRateStyles(props.playersRating)}
+                    styles={changeRateStyles(playersRating)}
                     title="Players Rating"
-                    text={`${props.playersRating} / 10.0`}
+                    text={`${playersRating} / 10.0`}
                 />
             </div>
             <div className="game-details my-2">
                 <ListItem
                     title="Players"
                     text={
-                        props.players.length > 1
-                            ? `${props.players[0]} -
-                                  ${props.players[props.players.length - 1]}`
-                            : props.players
+                        players.length > 1
+                            ? `${players[0]} -
+                                  ${players[players.length - 1]}`
+                            : players
                     }
                 />
-                <ListItem
-                    title="Playing Time"
-                    text={`${props.playingTime} min`}
-                />
-                <ListItem
-                    title="Complexity"
-                    text={`${props.complexity} / 10.0`}
-                />
+                <ListItem title="Playing Time" text={`${playingTime} min`} />
+                <ListItem title="Complexity" text={`${complexity} / 10.0`} />
             </div>
             <div>
                 <Paragraph styles="my-1">
-                    Categories: {props.categories.join(", ")}
+                    Categories: {categories.join(", ")}
                 </Paragraph>
                 <Paragraph styles="my-1">
-                    Mechanics: {props.mechanics.join(", ")}
+                    Mechanics: {mechanics.join(", ")}
                 </Paragraph>
                 <RateModal
                     isModalVisible={isModalVisible}
