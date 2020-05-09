@@ -1,7 +1,14 @@
+// React
 import React from "react";
+
+// Components
 import Paragraph from "./Paragraph";
 
+// Other libraries
+import moment from "moment";
+
 const Comment = (props) => {
+    const { author, content, rating, complexity, date } = props.comment;
     const fillStars = (param) => {
         return [...Array(+param)].map((e, i) => (
             <i key={i} className="fas fa-star primary-dark"></i>
@@ -15,20 +22,21 @@ const Comment = (props) => {
 
     return (
         <div className="comment-card">
-            <Paragraph>{props.author}</Paragraph>
-            <Paragraph styles="my-1">
-                Rated {props.rating}
+            <Paragraph>{author}</Paragraph>
+            <Paragraph>{moment(new Date(+date)).fromNow()}</Paragraph>
+            <Paragraph styles="mt-1">
+                Rated {rating}
                 <span> </span>
-                {fillStars(props.rating)}
-                {emptyStars(props.rating)}
+                {fillStars(rating)}
+                {emptyStars(rating)}
             </Paragraph>
             <Paragraph styles="mb-1">
-                Complexity: {props.complexity}
+                Complexity: {complexity}
                 <span> </span>
-                {fillStars(props.complexity)}
-                {emptyStars(props.complexity)}
+                {fillStars(complexity)}
+                {emptyStars(complexity)}
             </Paragraph>
-            <Paragraph>{props.text}</Paragraph>
+            <Paragraph>{content}</Paragraph>
         </div>
     );
 };

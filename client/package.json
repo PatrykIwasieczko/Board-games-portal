@@ -11,6 +11,7 @@
         "axios": "^0.19.2",
         "graphql": "^15.0.0",
         "graphql-hooks": "^4.4.4",
+        "moment": "^2.25.3",
         "node-sass": "^4.13.1",
         "react": "^16.13.1",
         "react-apollo": "^3.1.5",

@@ -32,6 +32,7 @@ const GET_GAME = gql`
                 rating
                 complexity
                 content
+                date
             }
         }
     }
@@ -81,15 +82,11 @@ const DetailsPage = (props, id) => {
                     />
                     <Review />
                     <SizedBox space="2" />
-                    {data.game.comments.map((comment) => (
-                        <Comment
-                            key={comment._id}
-                            author={comment.author}
-                            text={comment.content}
-                            rating={comment.rating}
-                            complexity={comment.complexity}
-                        />
-                    ))}
+                    {data.game.comments
+                        .sort((a, b) => b.date - a.date)
+                        .map((comment, index) => (
+                            <Comment comment={comment} key={index} />
+                        ))}
                 </Container>
             )}
         </>
