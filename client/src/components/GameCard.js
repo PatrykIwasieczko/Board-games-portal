@@ -47,14 +47,15 @@ const GameCard = (props) => {
         setIsModalVisible(true);
     };
 
-    const handleOk = (input) => {
+    const handleOk = async (input) => {
         setIsModalVisible(false);
-        addComment({
+        await addComment({
             variables: {
                 id: props.gameId,
                 commentInput: input,
             },
         });
+        await props.refetch();
     };
 
     const handleCancel = (e) => {

@@ -72,7 +72,7 @@ const RankPage = () => {
                                 title={item.title}
                                 playersRating={
                                     item.playersRating.length === 0
-                                        ? "0"
+                                        ? "0.0"
                                         : getAverageFromArray(
                                               item.playersRating
                                           )

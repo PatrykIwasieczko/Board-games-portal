@@ -41,8 +41,8 @@ const GET_GAME = gql`
     }
 `;
 
-const DetailsPage = (props, id) => {
-    const { data, loading, error } = useQuery(GET_GAME, {
+const DetailsPage = (props) => {
+    const { data, loading, error, refetch } = useQuery(GET_GAME, {
         variables: { id: props.match.params.id },
     });
 
@@ -66,6 +66,7 @@ const DetailsPage = (props, id) => {
                                 : getAverageFromArray(data.game.complexity)
                         }
                         gameId={props.match.params.id}
+                        refetch={refetch}
                     />
                     <Review />
                     <SizedBox space="2" />

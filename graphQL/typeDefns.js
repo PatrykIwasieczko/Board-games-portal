@@ -5,8 +5,8 @@ const schema = buildSchema(`
 type Comment {
     author: String!
     content: String
-    rating: String
-    complexity: String
+    rating: Float
+    complexity: Float
     date: String
 }
 
@@ -14,10 +14,10 @@ type Game {
     _id: ID!
     img: String
     title: String!
-    ourRating: String
-    playersRating: [String]
-    votersCount: String
-    complexity: [String]
+    ourRating: Float
+    playersRating: [Float]
+    votersCount: Int
+    complexity: [Int]
     categories: [String]
     mechanics: [String]
     comments: [Comment]
@@ -37,8 +37,8 @@ input GameInput {
 input CommentInput {
     author: String!
     content: String
-    rating: String!
-    complexity: String
+    rating: Int!
+    complexity: Int!
 }
 
 type gameQuery {

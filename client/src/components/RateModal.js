@@ -50,9 +50,9 @@ const RateModal = (props) => {
             onOk={() =>
                 props.handleOk({
                     author: "Author",
-                    rating: rateValue.toString(),
+                    rating: rateValue,
                     content: review,
-                    complexity: complexityValue.toString(),
+                    complexity: complexityValue,
                 })
             }
             onCancel={props.handleCancel}

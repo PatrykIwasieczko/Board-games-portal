@@ -50,21 +50,21 @@ const gameSchema = new Schema({
         required: true,
     },
     ourRating: {
-        type: String,
+        type: Number,
         default: "0",
         required: true,
     },
     playersRating: {
-        type: [String],
+        type: [Number],
         default: [],
         required: true,
     },
     votersCount: {
-        type: String,
-        default: "0",
+        type: Number,
+        default: 0,
     },
     complexity: {
-        type: [String],
+        type: [Number],
         default: [],
     },
     categories: {

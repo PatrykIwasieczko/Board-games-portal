@@ -9,14 +9,14 @@ const commentSchema = new Schema({
         required: true,
     },
     rating: {
-        type: String,
+        type: Number,
         required: true,
     },
     content: {
         type: String,
     },
     complexity: {
-        type: String,
+        type: Number,
     },
     date: {
         type: String,

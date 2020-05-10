@@ -26,8 +26,6 @@ const rootValue = {
                 rating: args.commentInput.rating,
                 complexity: args.commentInput.complexity,
             });
-
-            await comment.save();
             game.votersCount++;
             game.complexity.push(comment.complexity);
             game.playersRating.push(comment.rating);
