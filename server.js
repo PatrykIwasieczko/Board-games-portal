@@ -1,13 +1,10 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql");
-const { buildSchema } = require("graphql");
+const schema = require("./graphQL/typeDefns");
+const rootValue = require("./graphQL/resolvers");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
-const Game = require("./models/game");
-const Comment = require("./models/comment");
 
 dotenv.config({ path: "./config/config.env" });
 connectDB();
@@ -20,119 +17,8 @@ app.use(cors());
 app.use(
     "/graphql",
     graphqlHttp({
-        schema: buildSchema(`
-
-        type Comment {
-            author: String!
-            content: String
-            rating: String
-            complexity: String
-            date: String
-        }
-
-        type Game {
-            _id: ID!
-            img: String
-            title: String!
-            ourRating: String
-            playersRating: [String]
-            votersCount: String
-            complexity: [String]
-            categories: [String]
-            mechanics: [String]
-            comments: [Comment]
-            players: [String]
-            ourReview: [String]
-            playingTime: String
-        }
-
-        input GameInput {
-            title: String!
-            categories: [String]!
-            mechanics: [String]!
-            players: [String]!
-            playingTime: String!
-        }
-
-        input CommentInput {
-            author: String!
-            content: String
-            rating: String!
-            complexity: String
-        }
-
-        type gameQuery {
-            games: [Game!]!
-            game(id: ID!): Game
-        }
-
-        type gameMutation {
-            createGame(gameInput: GameInput): Game
-            commentGame(commentInput: CommentInput, id: ID!): Comment
-        }
-
-        schema {
-            query: gameQuery
-            mutation: gameMutation
-        }
-    `),
-        rootValue: {
-            games: () => {
-                return Game.find()
-                    .then((games) => {
-                        return games;
-                    })
-                    .catch((err) => {
-                        throw err;
-                    });
-            },
-
-            game: (args) => {
-                return Game.findById(args.id)
-                    .then((game) => {
-                        return game;
-                    })
-                    .catch((err) => {
-                        throw err;
-                    });
-            },
-            commentGame: async (args) => {
-                const game = await Game.findById(args.id);
-                const comment = new Comment({
-                    author: args.commentInput.author,
-                    content: args.commentInput.content,
-                    rating: args.commentInput.rating,
-                    complexity: args.commentInput.complexity,
-                });
-
-                await comment.save();
-                game.votersCount++;
-                game.complexity.push(comment.complexity);
-                game.playersRating.push(comment.rating);
-                game.comments.push(comment);
-                await game.save();
-            },
-            createGame: (args) => {
-                const game = new Game({
-                    title: args.gameInput.title,
-                    categories: args.gameInput.categories,
-                    mechanics: args.gameInput.mechanics,
-                    players: args.gameInput.players,
-                    playingTime: args.gameInput.playingTime,
-                });
-
-                return game
-                    .save()
-                    .then((result) => {
-                        console.log(result);
-                        return result;
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        throw err;
-                    });
-            },
-        },
+        schema,
+        rootValue,
         graphiql: true,
     })
 );
