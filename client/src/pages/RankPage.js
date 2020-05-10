@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Components
 import Container from "../components/Container";
@@ -45,25 +45,94 @@ const RankPage = () => {
         }
     };
 
-    const { data, loading, error } = useQuery(GET_GAMES);
+    const sortArray = (type, isArray = false) => {
+        const types = {
+            title: "title",
+            playersRating: "playersRating",
+            ourRating: "ourRating",
+            votersCount: "votersCount",
+        };
 
+        const sortProperty = types[type];
+        let sorted = [...games].sort(
+            (a, b) => b[sortProperty] - a[sortProperty]
+        );
+        if (isArray) {
+            sorted = [...games].sort(
+                (a, b) =>
+                    getAverageFromArray(b.playersRating) -
+                    getAverageFromArray(a.playersRating)
+            );
+        }
+        if (types[type] === "title") {
+            sorted = [...games].sort((a, b) => {
+                return b[sortProperty].toLowerCase() >
+                    a[sortProperty].toLowerCase()
+                    ? -1
+                    : 1;
+            });
+        }
+        setGames(sorted);
+    };
+
+    const { data, loading, error } = useQuery(GET_GAMES);
+    const [games, setGames] = useState();
+
+    useEffect(() => {
+        if (!loading && data) {
+            setGames(
+                data.games.sort(
+                    (a, b) =>
+                        getAverageFromArray(b.playersRating) -
+                        getAverageFromArray(a.playersRating)
+                )
+            );
+        }
+    }, [data, loading]);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error</p>;
+
     return (
         <Container>
             <Heading styles="py-2">RankPage</Heading>
             <div className="rank-table">
                 <div className="headers">
                     <Paragraph>Rank</Paragraph>
-                    <Paragraph styles="left-align clickable">Title</Paragraph>
-                    <Paragraph styles="clickable">Players Rating</Paragraph>
-                    <Paragraph styles="clickable">Our Rating</Paragraph>
-                    <Paragraph styles="clickable">Number of voters</Paragraph>
+                    <Paragraph
+                        styles="left-align clickable"
+                        onClick={() => {
+                            sortArray("title");
+                        }}
+                    >
+                        Title
+                    </Paragraph>
+                    <Paragraph
+                        styles="clickable"
+                        onClick={() => {
+                            sortArray("playersRating", true);
+                        }}
+                    >
+                        Players Rating
+                    </Paragraph>
+                    <Paragraph
+                        styles="clickable"
+                        onClick={() => {
+                            sortArray("ourRating");
+                        }}
+                    >
+                        Our Rating
+                    </Paragraph>
+                    <Paragraph
+                        styles="clickable"
+                        onClick={() => {
+                            sortArray("votersCount");
+                        }}
+                    >
+                        Number of voters
+                    </Paragraph>
                 </div>
-                {data &&
-                    data.games &&
-                    data.games
-                        .sort((a, b) => b.playersRating - a.playersRating)
+                {games &&
+                    games
                         .map((item, index) => (
                             <SingleGame
                                 rank={index + 1}

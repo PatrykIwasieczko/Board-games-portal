@@ -80,7 +80,7 @@ const GameCard = (props) => {
                 <img src={`/images/${img}`} alt="" />
             </div>
             <div className="ratings my-2">
-                {ourRating === 0 ? (
+                {ourRating === "0" ? (
                     <ListItem
                         styles={changeRateStyles(ourRating)}
                         title="Our Rating"
