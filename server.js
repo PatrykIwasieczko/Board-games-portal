@@ -2,16 +2,19 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql");
 const { buildSchema } = require("graphql");
-const mongoose = require("mongoose");
-const config = require("config");
+const connectDB = require("./config/db");
+const dotenv = require("dotenv");
 const cors = require("cors");
-// const { GraphQLDateTime } = require("graphql-iso-date");
 
 const Game = require("./models/game");
 const Comment = require("./models/comment");
 
+dotenv.config({ path: "./config/config.env" });
+connectDB();
+
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
+
 app.use(cors());
 
 app.use(
@@ -134,14 +137,11 @@ app.use(
     })
 );
 
-const db = config.get("mongoURI");
-mongoose
-    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log("MongoDB Connected");
-    })
-    .catch((err) => console.log(err));
+const PORT = process.env.PORT || 5000;
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(
+    PORT,
+    console.log(
+        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+    )
+);

@@ -14,6 +14,7 @@ import SizedBox from "../components/SizedBox";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 
+// Utils
 import { getAverageFromArray } from "../utils/helpers";
 
 const GET_GAME = gql`
