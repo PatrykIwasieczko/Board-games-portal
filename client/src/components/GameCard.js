@@ -12,22 +12,10 @@ import { StarOutlined } from "@ant-design/icons";
 import RateModal from "./RateModal";
 
 // GraphQL
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import useCommentMutation from "../graphQL/useCommentMutation";
 
 // Utils
 import { changeRateStyles } from "../utils/helpers";
-
-const POST_COMMENT = gql`
-    mutation commentGame($id: ID!, $commentInput: CommentInput) {
-        commentGame(id: $id, commentInput: $commentInput) {
-            author
-            rating
-            content
-            complexity
-        }
-    }
-`;
 
 const GameCard = (props) => {
     const {
@@ -41,21 +29,20 @@ const GameCard = (props) => {
     } = props.game;
     const { complexity, playersRating } = props;
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [addComment] = useMutation(POST_COMMENT);
+    let commentGame = useCommentMutation();
 
     const showModal = () => {
         setIsModalVisible(true);
     };
 
     const handleOk = async (input) => {
-        setIsModalVisible(false);
-        await addComment({
+        await commentGame({
             variables: {
                 id: props.gameId,
                 commentInput: input,
             },
         });
-        await props.refetch();
+        setIsModalVisible(false);
     };
 
     const handleCancel = (e) => {

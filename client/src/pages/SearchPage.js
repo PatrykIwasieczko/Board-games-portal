@@ -244,7 +244,9 @@ const SearchPage = () => {
                 <List
                     itemLayout="horizontal"
                     dataSource={games.sort(
-                        (a, b) => b.playersRating - a.playersRating
+                        (a, b) =>
+                            getAverageFromArray(b.playersRating) -
+                            getAverageFromArray(a.playersRating)
                     )}
                     renderItem={(game) => (
                         <List.Item>

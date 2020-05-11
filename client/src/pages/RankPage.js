@@ -11,26 +11,12 @@ import SingleGame from "../components/SingleGame";
 import { Pagination } from "antd";
 
 // GraphQL
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import useGamesQuery from "../graphQL/useGamesQuery";
 
 // Utils
 import { getAverageFromArray } from "../utils/helpers";
 
-const GET_GAMES = gql`
-    {
-        games {
-            _id
-            title
-            img
-            playersRating
-            ourRating
-            votersCount
-        }
-    }
-`;
-
-const RankPage = () => {
+const RankPage = (props) => {
     const numEachPage = 5;
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(5);
@@ -75,7 +61,7 @@ const RankPage = () => {
         setGames(sorted);
     };
 
-    const { data, loading, error } = useQuery(GET_GAMES);
+    const { data, loading, error } = useGamesQuery();
     const [games, setGames] = useState();
 
     useEffect(() => {
